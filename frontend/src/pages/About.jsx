@@ -110,7 +110,8 @@ const About = () => {
       </section>
 
       
-   
+      {/* <Footer /> */}
+      <Footer />
     </div>
   )
 }
