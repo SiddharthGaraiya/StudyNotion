@@ -103,6 +103,8 @@ const About = () => {
         </div>
       </section>
 
+      <StatsComponenet />
+      
     </div>
   )
 }
