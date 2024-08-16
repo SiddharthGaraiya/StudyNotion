@@ -65,7 +65,7 @@ function VerifyEmail() {
               value={otp}
               onChange={setOtp}
               numInputs={6}
-              renderInput={(props) => (
+              renderInput={(props) => 
                 <input
                   {...props}
                   placeholder="-"
@@ -74,7 +74,7 @@ function VerifyEmail() {
                   }}
                   className="w-[48px] lg:w-[60px] border-0 bg-richblack-800 rounded-[0.5rem] text-richblack-5 aspect-square text-center focus:border-0 focus:outline-2 focus:outline-yellow-50"
                 />
-              )}
+              }
               containerStyle={{
                 justifyContent: "space-between",
                 gap: "0 6px",
@@ -95,7 +95,7 @@ function VerifyEmail() {
             </Link>
             <button
               className="flex items-center text-blue-100 gap-x-2"
-              onClick={() => dispatch(sendOtp(signupData.email))}
+              onClick={() => dispatch(sendOtp(signupData.email, navigate))}
             >
               <RxCountdownTimer />
               Resend it
