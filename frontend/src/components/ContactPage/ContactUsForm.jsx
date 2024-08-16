@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react"
+import "../../App.css"
 import { useForm } from "react-hook-form"
 
 import CountryCode from "../../data/countrycode.json"
 import { apiConnector } from "../../services/apiconnector"
 import { contactusEndpoint } from "../../services/apis"
+import { toast } from "react-hot-toast"
 
 const ContactUsForm = () => {
   const [loading, setLoading] = useState(false)
@@ -23,10 +25,14 @@ const ContactUsForm = () => {
         contactusEndpoint.CONTACT_US_API,
         data
       )
-      // console.log("Email Res - ", res)
+      console.log("Email Res - ", res)
+      if(res.data.success){
+        toast.success(res.data.message);
+      }
       setLoading(false)
     } catch (error) {
       console.log("ERROR MESSAGE - ", error.message)
+      toast.error(error.message)
       setLoading(false)
     }
   }
@@ -44,7 +50,8 @@ const ContactUsForm = () => {
   }, [reset, isSubmitSuccessful])
 
   return (
-    <form
+    <div>
+      <form
       className="flex flex-col gap-7"
       onSubmit={handleSubmit(submitContactForm)}
     >
@@ -181,7 +188,13 @@ const ContactUsForm = () => {
       >
         Send Message
       </button>
-    </form>
+      </form>
+      {
+        loading && (
+          <div className="mx-auto spinner"></div>
+        )
+      }
+    </div>
   )
 }
 
