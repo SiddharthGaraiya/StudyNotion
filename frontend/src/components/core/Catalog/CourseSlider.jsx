@@ -1,14 +1,19 @@
-import React from 'react'
+import React, { useEffect, useState } from "react"
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react"
 
-import {Swiper, SwiperSlide} from "swiper/react"
+// Import Swiper styles
 import "swiper/css"
 import "swiper/css/free-mode"
 import "swiper/css/pagination"
-import { Autoplay,FreeMode,Navigation, Pagination}  from 'swiper'
+// import "../../.."
+// Import required modules
+import { FreeMode, Pagination, Autoplay } from "swiper"
 
-import Course_Card from './Course_Card'
+// import { getAllCourses } from "../../services/operations/courseDetailsAPI"
+import Course_Card from "./Course_Card"
 
-const CourseSlider = ({Courses}) => {
+function CourseSlider({ Courses }) {
   return (
     <>
       {Courses?.length ? (
@@ -16,7 +21,11 @@ const CourseSlider = ({Courses}) => {
           slidesPerView={1}
           spaceBetween={25}
           loop={true}
-          modules={[FreeMode, Pagination]}
+          modules={[FreeMode, Pagination, Autoplay]}
+          autoplay={{
+            delay: 2000,
+            disableOnInteraction: false,
+          }}
           breakpoints={{
             1024: {
               slidesPerView: 3,

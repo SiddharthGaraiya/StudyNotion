@@ -1,20 +1,22 @@
-import React, { useEffect, useState } from 'react'
-import RatingStars from '../../common/RatingStars'
-import GetAvgRating from '../../../utils/avgRating';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react"
+// Icons
+import { FaRegStar, FaStar } from "react-icons/fa"
+import ReactStars from "react-rating-stars-component"
+import { Link } from "react-router-dom"
 
-const Course_Card = ({course, Height}) => {
+import GetAvgRating from "../../../utils/avgRating"
+import RatingStars from "../../common/RatingStars"
 
+function Course_Card({ course, Height }) {
+  // const avgReviewCount = GetAvgRating(course.ratingAndReviews)
+  // console.log(course.ratingAndReviews)
+  const [avgReviewCount, setAvgReviewCount] = useState(0)
+  useEffect(() => {
+    const count = GetAvgRating(course.ratingAndReviews)
+    setAvgReviewCount(count)
+  }, [course])
+  // console.log("count............", avgReviewCount)
 
-    const [avgReviewCount, setAvgReviewCount] = useState(0);
-
-    useEffect(()=> {
-        const count = GetAvgRating(course.ratingAndReviews);
-        setAvgReviewCount(count);
-    },[course])
-
-
-    
   return (
     <>
       <Link to={`/courses/${course._id}`}>
@@ -33,6 +35,15 @@ const Course_Card = ({course, Height}) => {
             </p>
             <div className="flex items-center gap-2">
               <span className="text-yellow-5">{avgReviewCount || 0}</span>
+              {/* <ReactStars
+                count={5}
+                value={avgReviewCount || 0}
+                size={20}
+                edit={false}
+                activeColor="#ffd700"
+                emptyIcon={<FaRegStar />}
+                fullIcon={<FaStar />}
+              /> */}
               <RatingStars Review_Count={avgReviewCount} />
               <span className="text-richblack-400">
                 {course?.ratingAndReviews?.length} Ratings
